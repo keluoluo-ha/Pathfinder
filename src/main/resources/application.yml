@@ -1,0 +1,78 @@
+server:
+  port: 8080
+  tomcat:
+    max-http-form-post-size: 55MB
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 55MB
+  ai:
+    dashscope:
+      api-key: sk-1018307cb75b45d288855056b94f5d68
+    chat:
+      options:
+        model: qwen-plus
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pathfinder
+    username: root
+    password: 83811312h
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+      timeout: 3000ms
+  cache:
+    type: redis
+    redis:
+      time-to-live: 1h
+      cache-null-values: false
+
+# 👇 开启接口访问日志（调用接口就显示 200）
+logging:
+  level:
+    org.springframework.web: DEBUG
+    web: DEBUG
+    com.hhk.pathfinderbacked: debug
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.hhk.pathfinderbacked.entity
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+
+jwt:
+  secret: pathfinder_jwt_secret_for_mvp_please_change
+  expire-hours: 24
+
+pathfinder:
+  forum:
+    upload-dir: ./uploads/forum
+    max-file-size-mb: 50
+  recommendation:
+    chong-limit: 15
+    wen-limit: 15
+    bao-limit: 10
+    redis-ttl-minutes: 120
+    db-cache-hours: 12
+
+# 👇 文档配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /doc.html
+    persist-authorization: true
+
+knife4j:
+  enable: true
+search-api:
+  api-key: Qk41XafG3fMDvDn8ZzheMZxn
